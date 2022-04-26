@@ -4,7 +4,7 @@ const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
-const { SendTokenResponse } = require('../../helpers/SendToken');
+const SendTokenResponse = require('../../helpers/SendTokenResponse');
 
 
 // @route   POST api/users
@@ -54,6 +54,8 @@ router.post('/', [
         res.status(500).send('Server Error');
     }
 });
+
+
 
 
 
