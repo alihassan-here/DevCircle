@@ -1,5 +1,0 @@
-{
-    "mongoURI":"mongodb+srv://ali:1234@nodeandexpress-projects.gnvwa.mongodb.net/devconnector?retryWrites=true&w=majority",
-    "JWT_SECRET":"devconnector",
-    "JWT_EXPIRY":"7d"
-}
