@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 
-const PostItem = ({ auth, addLike, removeLike, post: { _id, text, name, avatar, user, likes, comments, date }, showActions }) => {
+const PostItem = ({ auth, addLike, removeLike, deletePost, post: { _id, text, name, avatar, user, likes, comments, date }, showActions }) => {
     return (
         <div className="post bg-white p-1 my-1">
             <div>
@@ -68,4 +68,4 @@ PostItem.propTypes = {
 const mapStateToProps = state => ({
     auth: state.auth
 })
-export default connect(mapStateToProps, { addLike, removeLike })(PostItem);
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(PostItem);
