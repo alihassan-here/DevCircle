@@ -6,9 +6,9 @@ import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
-import { getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
+const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: { profile, loading } }) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
@@ -23,47 +23,12 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 <DashboardActions />
                 <Experience experience={profile.experience} />
                 <Education education={profile.education} />
+                <div className='my-2'>
+                    <button className='btn btn-danger' onClick={() => deleteAccount()}>
+                        <i className='fas fa-user-minus' /> Delete My Account
+                    </button>
+                </div>
             </>
-            {/*             
-            <p>
-                <i className="fas fa-user"></i> {profile.company}
-            </p>
-            <p>
-                <i className="fas fa-map-marked-alt"></i> {profile.location}
-            </p>
-            <p>
-                <i className="fas fa-briefcase"></i> {profile.status}
-            </p>
-            <p>
-                <i className="fas fa-phone"></i> {profile.phone}
-            </p>
-            <p>
-                <i className="fas fa-envelope"></i> {profile.email}
-            </p>
-            <p>
-                <i className="fas fa-globe"></i> {profile.website}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.twitter}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.facebook}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.linkedin}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.instagram}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.youtube}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.github}
-            </p>
-            <p>
-                <i className="fas fa-user"></i> {profile.social && profile.social.skype}
-            </p> */}
         </> :
             <>
                 <p>You have not yet setup a profile, please add some info</p>
@@ -78,7 +43,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    deleteAccount: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -88,5 +54,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getCurrentProfile }
+    { getCurrentProfile, deleteAccount }
 )(Dashboard);

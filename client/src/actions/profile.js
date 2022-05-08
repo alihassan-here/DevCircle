@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, GET_PROFILES, CLEAR_PROFILE, GET_REPOS } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, GET_PROFILES, CLEAR_PROFILE, GET_REPOS, ACCOUNT_DELETED } from './types';
 
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
@@ -76,9 +76,6 @@ export const getGithubRepos = username => async dispatch => {
         });
     }
 }
-
-
-
 
 //Create or update profile
 export const createProfile = (formData, history, edit = false) => async dispatch => {
@@ -218,3 +215,23 @@ export const deleteEducation = id => async dispatch => {
         });
     }
 }
+
+// Delete account & profile
+export const deleteAccount = () => async dispatch => {
+    if (window.confirm('Are you sure? This can NOT be undone!')) {
+        try {
+            await axios.delete('/api/profile');
+
+            dispatch({ type: CLEAR_PROFILE });
+            dispatch({ type: ACCOUNT_DELETED });
+
+            dispatch(setAlert('Your account has been permanantly deleted'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status }
+            });
+        }
+    }
+};
+

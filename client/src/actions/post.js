@@ -8,7 +8,7 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
 } from './types';
 
 //Get posts
@@ -153,3 +153,4 @@ export const deleteComment = (postId, commentId) => async dispatch => {
         });
     }
 }
+
